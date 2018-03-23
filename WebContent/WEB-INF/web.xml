@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
+  <display-name>dangdang</display-name>
+  <welcome-file-list>
+    <welcome-file>index.jsp</welcome-file>
+  </welcome-file-list>
+  <servlet>
+    <description></description>
+    <display-name>ControllerServlet</display-name>
+    <servlet-name>ControllerServlet</servlet-name>
+    <servlet-class>com.tarena.action.ControllerServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ControllerServlet</servlet-name>
+    <url-pattern>*.action</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>VerifyCodeServlet</display-name>
+    <servlet-name>VerifyCodeServlet</servlet-name>
+    <servlet-class>com.tarena.action.VerifyCodeServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>VerifyCodeServlet</servlet-name>
+    <url-pattern>/user/verify_code</url-pattern>
+  </servlet-mapping>
+</web-app>
