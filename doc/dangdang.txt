@@ -1,0 +1,106 @@
+1.项目需求分析
+	模拟当当网部分功能，在线电子商务平台，在线购物系统。
+	(1) 商品展示模块(main)
+		主界面、类别浏览界面、商品详情
+	(2) 购物车模块(cart)
+		添加,更改数量,删除,恢复购买,金额统计等
+	(3) 用户模块(user)
+		注册,登录
+	(4) 订单模块(order)
+		创建订单(确认),填写送货地址,成功提示
+		
+2.项目技术架构
+	整体基于MVC架构,实现分层设计
+	(1)显示层(View)
+		JSP,jQuery,Ajax,Struts2标签+OGNL表达式
+	(2)控制层(Controller)
+		web.xml配置;Servlet组件;Struts2控制器
+	(3)业务层(Model)
+		service代码;Action组件
+	(4)数据访问层(Model)
+		DAO组件(JDBC技术)
+	
+3.项目文件的结构
+	(1) src的目录结构
+	项目的顶层包:com.tarena.dangdang
+		com.tarena.entity				实体包
+		com.tarena.dao					DAO接口包
+		com.tarena.dao.impl			DAO接口包
+		com.tarena.util					工具类包
+		com.tarena.action				业务类
+		com.tarena.action.main		商品展示模块
+		com.tarena.action.cart		购物车模块
+		com.tarena.action.order	订单模块
+		com.tarena.action.user		用户模块
+	(2) Web	Content目录
+		/common					公共的JSP页面(页眉页脚等)
+		/css							层叠样式文件
+		/js								JavaScript脚本文件
+		/images					界面的图片
+		/productimages		商品的图片
+		/main						商品展示JSP
+		/cart							购物车JSP
+		/order						订单JSP
+		/user							用户JSP
+		
+4.创建数据库和表结构
+	(1) 使用MySQL数据库
+		c:>mysql -u root					//登录到MySQL
+		mysql> status;						//列出当前数据库的状态信息
+		mysql> show databases;		//显示所有数据库
+	(2) 创建dangdang数据库
+		mysql> create database dangdang charset utf8;
+													//创建数据库并同时指定字符编码
+		mysql> use dangdang;			//选择数据库
+
+	(3) 在库中创建d_user表
+		用户表(	ID 整数(12) 主键 非空 自增列,			//和业务无关的字段
+					邮箱 字符(50) 唯一键 非空,
+					昵称 字符(50) 默认值 null,
+					密码 字符(50) 非空,
+					用户等级 整数(12) 非空 默认值 0,		//普通用户-0,高级用户-1,VIP用户-2
+					邮箱验证码 字符串(50) 非空,
+					是否已验证 字符(3) 非空 默认值 N,
+					最后登录时间 长整数 默认值 null,
+					最后登录IP 字符(15) 默认值 null	)
+					
+		create table d_user(
+			id int(12) not null auto_increment,
+			email varchar(50) not null,
+			nickname varchar(50) default null,
+			password varchar(50) not null,
+			user_integral int(12) not null default 0,
+			email_verify_code varchar(50) not null,
+			is_email_verify char(3) not null default 'N',
+			last_login_time bigint default null,
+			last_login_ip varchar(15) default null,
+			primary key (id),
+			unique key (email)
+		) engine = InnoDB default charset = utf8;
+		
+5.导入常用工具类
+	Constant.java		常量类,其中放的都是常量,可将项目中多处使用的常量统一放在这个类
+	DBUtil.java			和数据库相关的工具类,可以方便的获得数据库的连接和释放数据库连接,注意:修改设置正确的用户名和密码
+	EmailUtil.java		发送邮件的工具类
+	MD5Util.java			可以将用户的密码使用加密算法生成一个特定的字符串,避免使用明码直接存储在库表中,以保证用户密码的安全
+	VerifyUtil.java		借助UUID工具类,生成一个唯一且不重复的注册验证码
+	
+作业:
+	(1) 在dangdang库中,创建剩余表
+	(2) 分析表和表之间的关系
+	(3) 在entity包中,创建user实体类,并提供setter/getter方法
+	(4) 复习如何使用jdbc向库中插入记录
+		有能力的同学,编写DAO代码
+		
+=======================================		
+Day03
+0. 完成库表的分析,并创建表结构
+1. 创建实体User类
+2. 创建DAO接口和实现类
+3. 编写JSP页面
+4. 根据MVC架构思想,编写控制器代码
+5. 在业务层代码汇总调用DAO类
+
+	
+	
+	
